@@ -1,0 +1,97 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Responsive Styles
+   ===================== */
+
+// Tablet: sidebar collapses to icons only
+@include respond($bp-tablet) {
+  .app {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .player {
+    left: 72px + $spacing-md;
+  }
+
+  .app--friends {
+    grid-template-columns: 72px 1fr $friends-width;
+  }
+
+  .sidebar__chevron {
+    display: none;
+  }
+
+  .sidebar__item {
+    justify-content: center;
+    padding: 12px;
+
+    span {
+      @include visually-hidden;
+    }
+  }
+}
+
+// Mobile (390px design): bottom tab bar, compact mini player
+@include respond($bp-mobile) {
+  .app {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 0;
+  }
+
+  .friends,
+  .sidebar,
+  .top-header:not(.top-header--search),
+  .top-header__link,
+  .top-header__actions,
+  .filters__chip:first-child {
+    display: none;
+  }
+
+  .top-header__search {
+    width: 100%;
+  }
+
+  .main-content {
+    padding: $spacing-md $spacing-md ($mobile-nav-height + $player-height-mobile + $spacing-xl);
+    border-radius: 0;
+  }
+
+  .filters {
+    margin: 0 0 $spacing-md;
+  }
+
+  .card-row {
+    grid-auto-columns: 140px;
+  }
+
+  .player {
+    right: $spacing-sm;
+    bottom: $mobile-nav-height + $spacing-sm;
+    left: $spacing-sm;
+    height: $player-height-mobile;
+    grid-template-columns: minmax(0, 1fr) auto;
+
+    &-right,
+    &__album,
+    &__progress {
+      display: none;
+    }
+
+    &__cover {
+      width: 40px;
+      height: 40px;
+    }
+
+    &__controls .player__button {
+      display: none;
+    }
+
+    &__play {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}

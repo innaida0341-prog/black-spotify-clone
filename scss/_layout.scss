@@ -1,0 +1,25 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Page Layout
+   ===================== */
+.app {
+  display: grid;
+  grid-template-columns: $sidebar-width 1fr;
+  height: 100vh;
+  padding: $spacing-sm;
+  gap: $spacing-sm;
+}
+
+.main-content {
+  overflow-y: auto;
+  border-radius: $radius-md;
+  background: $color-panel;
+  padding: 0 $spacing-lg ($player-height + $spacing-lg);
+}
+
+// Right sidebar (Friends Activity) is open
+.app--friends {
+  grid-template-columns: $sidebar-width 1fr $friends-width;
+}

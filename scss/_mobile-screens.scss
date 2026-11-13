@@ -1,0 +1,375 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Profile, Now Playing and
+   mobile-only blocks (Library, Playlist)
+   ===================== */
+// Blocks that exist only on mobile are hidden by default
+.lib-mobile,
+.pl-mobile,
+.player__open {
+  display: none;
+}
+
+.top-header__avatar {
+  display: block;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.search-bar {
+  @include flex(row, space-between, center, $spacing-sm);
+  flex: 1;
+  height: 40px;
+  padding: 0 $spacing-md;
+  border-radius: $radius-md;
+  background: $color-chip;
+  color: $color-muted;
+  font-size: $font-size-sm;
+}
+
+// Profile
+.profile {
+  @include flex(column, flex-start, stretch, $spacing-md);
+  max-width: 640px;
+  margin: 0 auto;
+  padding-bottom: $spacing-xl;
+}
+
+.profile-card {
+  @include flex(row, flex-start, center, $spacing-lg);
+  position: relative;
+  padding: $spacing-lg;
+  border: 1px solid #4a2d33;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4a2230, #1a1214);
+
+  &__avatar {
+    flex: none;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #e63946 0 22%, #3a86ff 22% 38%, #fff 38% 100%);
+  }
+
+  &__name {
+    margin: 0 0 $spacing-sm;
+    font-size: $font-size-xl;
+  }
+
+  &__meta {
+    margin: 0 0 $spacing-xs;
+    color: $color-muted;
+    font-size: $font-size-sm;
+  }
+
+  &__actions {
+    @include flex(row, flex-end, center);
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+  }
+}
+
+.panel {
+  padding: $spacing-md;
+  border: 1px solid $color-border;
+  border-radius: 12px;
+
+  &__head {
+    @include flex(row, space-between, center);
+    margin-bottom: $spacing-md;
+    font-size: 12px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  &__empty {
+    margin: $spacing-lg 0;
+    text-align: center;
+    color: $color-muted;
+  }
+}
+
+.plan-card {
+  padding: $spacing-md;
+  border: 1px solid #1f6b3a;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #14532d, #0e1a12);
+
+  &__label {
+    @include flex(row, flex-start, center, $spacing-sm);
+    margin: 0 0 $spacing-md;
+    font-size: 12px;
+
+    .icon {
+      color: $color-accent;
+    }
+  }
+
+  &__name {
+    margin: 0 0 $spacing-xs;
+    color: $color-accent;
+    font-size: $font-size-xl;
+    font-weight: 700;
+  }
+
+  &__price {
+    margin: 0;
+    font-size: $font-size-sm;
+  }
+}
+
+.profile-links a {
+  @include flex(row, space-between, center, $spacing-md);
+  padding: $spacing-lg $spacing-xs;
+  border-bottom: 1px solid $color-border;
+
+  span {
+    @include flex(row, flex-start, center, $spacing-md);
+  }
+}
+
+// Now playing
+.page-now-playing .main-content {
+  background: $color-panel;
+}
+
+.np {
+  @include flex(column, flex-start, stretch, $spacing-lg);
+  max-width: 420px;
+  margin: 0 auto;
+  padding: $spacing-md;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #3d424e, #22252c);
+
+  &__top {
+    @include flex(row, space-between, center);
+    font-size: 12px;
+  }
+
+  &__label {
+    @include flex(row, center, center, $spacing-sm);
+  }
+
+  &__meta {
+    @include flex(row, space-between, center);
+
+    h2,
+    p {
+      margin: 0;
+    }
+
+    p {
+      color: $color-muted;
+    }
+  }
+
+  &__lyrics p {
+    margin: 0 0 $spacing-md;
+    font-size: 22px;
+    font-weight: 700;
+
+    &.is-faded {
+      color: rgba($color-text, 0.35);
+    }
+  }
+
+  &__queue-head {
+    @include flex(row, space-between, center);
+    margin: $spacing-sm 0;
+    font-size: $font-size-sm;
+  }
+
+  &__track {
+    @include flex(row, flex-start, center, $spacing-md);
+    padding: $spacing-sm 0;
+    font-size: $font-size-sm;
+
+    > div {
+      flex: 1;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    small {
+      color: $color-muted;
+    }
+  }
+
+  &__thumb {
+    flex: none;
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-sm;
+  }
+
+  &__progress {
+    @include flex(column, flex-start, stretch, $spacing-xs);
+    font-size: 11px;
+    color: $color-muted;
+
+    div {
+      height: 4px;
+      border-radius: $radius-pill;
+      background: rgba($color-text, 0.3);
+
+      span {
+        display: block;
+        width: 52%;
+        height: 100%;
+        border-radius: inherit;
+        background: $color-text;
+      }
+    }
+
+    p {
+      @include flex(row, space-between, center);
+      margin: 0;
+    }
+  }
+
+  &__controls,
+  &__tools {
+    @include flex(row, space-between, center);
+  }
+
+  &__pause {
+    @include flex(row, center, center);
+    width: 56px;
+    height: 56px;
+    border: 0;
+    border-radius: 50%;
+    background: $color-text;
+    color: $color-bg;
+    cursor: pointer;
+  }
+}
+
+.icon-btn.is-active {
+  background: rgba($color-text, 0.15);
+  color: $color-text;
+}
+
+@include respond($bp-mobile) {
+  .page-now-playing {
+    .player,
+    .mobile-nav {
+      display: none;
+    }
+
+    .main-content {
+      padding: $spacing-sm;
+    }
+
+    .np {
+      max-width: none;
+    }
+  }
+
+  // Mini player opens Now Playing
+  .player {
+    &__open {
+      display: block;
+      position: absolute;
+      inset: 0;
+    }
+
+    &__play {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  // Library (mobile)
+  .lib-desktop {
+    display: none;
+  }
+
+  .lib-mobile {
+    display: block;
+
+    &__search {
+      @include flex(row, space-between, center, $spacing-md);
+    }
+
+    &__filters {
+      @include flex(row, flex-start, center, $spacing-md);
+      margin: $spacing-md 0;
+      color: $color-muted;
+      font-size: $font-size-sm;
+    }
+
+    &__list a {
+      @include flex(row, space-between, center);
+      padding: $spacing-lg 0;
+      border-bottom: 1px solid $color-border;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+
+  // Playlist (mobile)
+  .pl-desktop {
+    display: none;
+  }
+
+  .pl-mobile {
+    display: block;
+
+    &__search {
+      @include flex(row, space-between, center, $spacing-md);
+      margin-bottom: $spacing-lg;
+    }
+
+    &__cover {
+      width: 200px;
+      margin: 0 auto $spacing-lg;
+    }
+
+    &__title {
+      margin: 0 0 $spacing-sm;
+      font-size: $font-size-xl;
+    }
+
+    &__actions {
+      @include flex(row, space-between, center);
+      margin: $spacing-md 0;
+    }
+
+    &__track {
+      @include flex(row, flex-start, center, $spacing-md);
+      padding: $spacing-sm 0;
+
+      > div {
+        flex: 1;
+        min-width: 0;
+      }
+
+      p {
+        @include truncate;
+        margin: 0;
+      }
+
+      small {
+        color: $color-muted;
+      }
+    }
+
+    &__thumb {
+      flex: none;
+      width: 52px;
+      height: 52px;
+      border-radius: $radius-sm;
+    }
+  }
+}

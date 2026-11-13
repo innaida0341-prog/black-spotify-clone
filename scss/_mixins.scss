@@ -1,0 +1,47 @@
+@use "variables" as *;
+/* =====================
+   Mixins
+   ===================== */
+@mixin flex($direction: row, $justify: flex-start, $align: center, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin icon-button($size: 36px) {
+  @include flex(row, center, center);
+  width: $size;
+  height: $size;
+  border: 0;
+  border-radius: $radius-pill;
+  background: transparent;
+  color: $color-muted;
+  cursor: pointer;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@mixin respond($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}

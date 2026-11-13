@@ -1,0 +1,131 @@
+@use "sass:list";
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Search Page
+   ===================== */
+$discover-colors: #1e3264, #ba5d07, #1e3264, #8d67ab, #b02897, #8d67ab, #777,
+  #ba5d07;
+$genre-colors: #148a08, #d84000, #503750, #006450, #e8115b, #1e3264, #e13300,
+  #477d95;
+
+// Header search field
+.top-header__search {
+  @include flex(row, flex-start, center, $spacing-sm);
+  width: 340px;
+  padding: 0 $spacing-md;
+  border-radius: $radius-md;
+  background: $color-surface;
+  color: $color-muted;
+
+  input {
+    flex: 1;
+    height: 44px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: $color-text;
+    font: inherit;
+  }
+}
+
+.section__title--md {
+  font-size: 20px;
+}
+
+.section__title--sm {
+  font-size: $font-size-md;
+}
+
+// Recent searches
+.recent-list {
+  @include flex(row, flex-start, flex-start, $spacing-lg);
+  margin-bottom: $spacing-xl;
+}
+
+.recent {
+  position: relative;
+  width: 150px;
+  text-align: center;
+
+  &__cover {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin-bottom: $spacing-sm;
+    border-radius: $radius-sm;
+
+    &--round {
+      border-radius: 50%;
+    }
+  }
+
+  &__title,
+  &__subtitle {
+    @include truncate;
+    display: block;
+    font-size: $font-size-sm;
+  }
+
+  &__subtitle {
+    color: $color-muted;
+    font-size: 12px;
+  }
+
+  &__remove {
+    @include icon-button(28px);
+    position: absolute;
+    top: $spacing-xs;
+    right: $spacing-xs;
+    background: rgba($color-bg, 0.7);
+    color: $color-text;
+
+    .icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+// Browse tiles
+.tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  // decorative rotated cover in the corner
+  &::after {
+    content: "";
+    position: absolute;
+    right: -10%;
+    bottom: -6%;
+    width: 55%;
+    height: 55%;
+    border-radius: $radius-sm;
+    background: rgba($color-bg, 0.28);
+    transform: rotate(25deg);
+  }
+}
+
+@for $i from 1 through 8 {
+  .tile--discover-#{$i} {
+    background: list.nth($discover-colors, $i);
+  }
+
+  .tile--genre-#{$i} {
+    background: list.nth($genre-colors, $i);
+  }
+}
+
+.browse {
+  margin-top: $spacing-md;
+}

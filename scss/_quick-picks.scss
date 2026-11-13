@@ -1,0 +1,40 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Quick Picks (mobile only)
+   ===================== */
+.quick-picks {
+  display: none;
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm;
+  }
+
+  &__item {
+    @include flex(row, flex-start, center, $spacing-sm);
+    overflow: hidden;
+    border-radius: $radius-sm;
+    background: $color-chip;
+  }
+
+  &__cover {
+    flex: none;
+    width: 48px;
+    height: 48px;
+  }
+
+  &__title {
+    @include truncate;
+    padding-right: $spacing-sm;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  @include respond($bp-mobile) {
+    display: block;
+    margin-bottom: $spacing-lg;
+  }
+}

@@ -1,0 +1,56 @@
+/* =====================
+   Variables
+   ===================== */
+// Colors
+$color-bg: #000;
+$color-panel: #121212;
+$color-surface: #1f1f1f;
+$color-chip: #2a2a2a;
+$color-player: #373c47;
+$color-text: #fff;
+$color-muted: #b3b3b3;
+$color-accent: #1ed760;
+$color-border: #2e2e2e;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// Radius
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-pill: 999px;
+
+// Layout
+$sidebar-width: 270px;
+$player-height: 84px;
+$header-height: 64px;
+
+// Typography
+$font-main: "Helvetica Neue", Arial, sans-serif;
+$font-size-sm: 13px;
+$font-size-md: 15px;
+$font-size-xl: 24px;
+$transition-base: 0.2s ease;
+
+// Card cover colors
+$cover-colors: #6b4a8a, #17302e, #e8a0a8, #3aa9b0, #c0b0b8, #8fb0c0,
+  #fcd57a, #d4aaa0, #e0a560, #7bcfb0, #9bb5d8, #c8d4ca;
+
+// Breakpoints
+$bp-tablet: 1024px;
+$bp-mobile: 768px;
+
+// Mobile layout
+$mobile-nav-height: 64px;
+$player-height-mobile: 56px;
+
+// Friends panel
+$friends-width: 300px;
+
+// Discover story card
+$story-width: 250px;
+$story-height: 400px;

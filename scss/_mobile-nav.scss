@@ -1,0 +1,35 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Mobile Bottom Navigation
+   ===================== */
+.mobile-nav {
+  display: none;
+
+  &__list {
+    @include flex(row, space-around, center);
+    height: 100%;
+  }
+
+  &__link {
+    @include flex(column, center, center, $spacing-xs);
+    font-size: 10px;
+    color: $color-muted;
+
+    &.is-active {
+      color: $color-text;
+    }
+  }
+
+  @include respond($bp-mobile) {
+    display: block;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: $mobile-nav-height;
+    background: $color-bg;
+    z-index: 10;
+  }
+}

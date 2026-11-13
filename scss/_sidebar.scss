@@ -1,0 +1,39 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Sidebar Styles
+   ===================== */
+.sidebar {
+  border-radius: $radius-md;
+  background: $color-panel;
+  padding: $spacing-md $spacing-sm;
+
+  &__chevron {
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+  }
+
+  &__list {
+    @include flex(column, flex-start, stretch, $spacing-xs);
+  }
+
+  &__item {
+    @include flex(row, flex-start, center, $spacing-md);
+    padding: 12px $spacing-md;
+    border-radius: $radius-md;
+    color: $color-muted;
+    font-weight: 700;
+    transition: color $transition-base, background $transition-base;
+
+    &:hover {
+      color: $color-text;
+    }
+
+    &.is-active {
+      background: $color-surface;
+      color: $color-text;
+    }
+  }
+}

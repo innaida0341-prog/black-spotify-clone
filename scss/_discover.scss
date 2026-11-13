@@ -1,0 +1,252 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Discover Page
+   ===================== */
+.page-discover .main-content {
+  padding-inline: 0;
+  scroll-snap-type: y proximity;
+}
+
+.page-discover .top-header {
+  padding-inline: $spacing-lg;
+}
+
+// Genre tabs
+.discover-tabs {
+  @include flex(row, flex-start, center, $spacing-sm);
+  position: sticky;
+  top: $header-height;
+  z-index: 4;
+  overflow-x: auto;
+  padding: $spacing-sm $spacing-lg;
+  background: $color-bg;
+
+  &__tab {
+    flex: none;
+    padding: $spacing-sm 14px;
+    border: 0;
+    border-radius: $radius-pill;
+    background: $color-chip;
+    color: $color-text;
+    font-size: $font-size-sm;
+    font-weight: 700;
+    cursor: pointer;
+
+    &.is-active {
+      background: $color-text;
+      color: $color-bg;
+    }
+  }
+}
+
+// Feed item
+.discover-item {
+  @include flex(row, center, center, $spacing-xl * 2);
+  min-height: 520px;
+  padding: $spacing-xl $spacing-lg;
+  scroll-snap-align: start;
+  background: linear-gradient(180deg, var(--tint) 0%, $color-panel 100%);
+
+  &--teal { --tint: #1f3b3a; }
+  &--orange { --tint: #3f1d10; }
+  &--blue { --tint: #1f1f4d; }
+
+  &__story {
+    position: relative;
+    width: $story-width;
+    height: $story-height;
+    overflow: hidden;
+    border-radius: $radius-md;
+  }
+
+  &__art {
+    position: absolute;
+    inset: 0;
+
+    &--1 { background: linear-gradient(180deg, #a6dce4 0%, #4a8fa0 55%, #1b2a30 100%); }
+    &--2 { background: radial-gradient(circle at 50% 40%, #ff7a18 0 28%, #c0392b 55%, #3a0f0f 100%); }
+    &--3 { background: linear-gradient(180deg, #6b5bd2 0%, #1b1b4a 100%); }
+  }
+
+  &__progress {
+    @include flex(row, center, center, $spacing-xs);
+    position: absolute;
+    right: $spacing-md;
+    bottom: $spacing-md;
+    left: $spacing-md;
+
+    span {
+      flex: 1;
+      height: 3px;
+      border-radius: $radius-pill;
+      background: rgba($color-text, 0.3);
+
+      &.is-active {
+        background: $color-text;
+      }
+    }
+  }
+
+  // Desktop info block
+  &__info {
+    @include flex(column, flex-start, flex-start, $spacing-md);
+    max-width: 420px;
+  }
+
+  &__head {
+    @include flex(row, flex-start, flex-end, $spacing-md);
+  }
+
+  &__cover {
+    flex: none;
+    width: 92px;
+    height: 92px;
+    border-radius: $radius-sm;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 28px;
+  }
+
+  &__byline {
+    margin: $spacing-xs 0 0;
+    color: $color-muted;
+    font-size: 12px;
+  }
+
+  &__actions {
+    @include flex(row, flex-start, center, $spacing-sm);
+  }
+
+  &__play {
+    @include flex(row, center, center);
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: $color-accent;
+    color: $color-bg;
+    cursor: pointer;
+  }
+
+  &__action {
+    @include icon-button(36px);
+    gap: $spacing-xs;
+    font-size: 11px;
+    width: auto;
+    padding: 0 $spacing-xs;
+  }
+
+  // Mobile-only parts
+  &__side,
+  &__bottom {
+    display: none;
+  }
+}
+
+.tags {
+  @include flex(row, flex-start, center, $spacing-sm);
+
+  &__tag {
+    padding: 2px 10px;
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+    color: $color-muted;
+    font-size: 11px;
+  }
+}
+
+/* Mobile Discover */
+@include respond($bp-mobile) {
+  .page-discover {
+    .player {
+      display: none;
+    }
+
+    .main-content {
+      padding: 0 0 ($mobile-nav-height + $spacing-md);
+    }
+  }
+
+  .discover-tabs {
+    top: 0;
+    gap: 0;
+    padding: 0;
+    border-bottom: 1px solid $color-border;
+
+    &__tab {
+      padding: $spacing-md;
+      border-radius: 0;
+      background: transparent;
+      color: $color-muted;
+
+      &.is-active {
+        border-bottom: 2px solid $color-accent;
+        background: transparent;
+        color: $color-text;
+      }
+    }
+  }
+
+  .discover-item {
+    padding: $spacing-sm $spacing-md;
+    min-height: calc(100vh - #{$mobile-nav-height} - 56px);
+    background: $color-panel;
+
+    &__story {
+      @include flex(column, flex-end, stretch, $spacing-md);
+      width: 100%;
+      height: auto;
+      min-height: 480px;
+      padding: $spacing-md;
+      background: $color-surface;
+    }
+
+    &__art,
+    &__info {
+      display: none;
+    }
+
+    &__progress {
+      position: static;
+    }
+
+    &__side {
+      @include flex(column, center, center, $spacing-md);
+      position: absolute;
+      right: $spacing-md;
+      bottom: 140px;
+      font-size: 10px;
+      color: $color-muted;
+    }
+
+    &__avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #cfd8e8 50%, #111 50%);
+    }
+
+    &__bottom {
+      @include flex(row, space-between, center);
+    }
+
+    &__track {
+      @include flex(row, flex-start, center, $spacing-sm);
+      font-size: $font-size-sm;
+
+      small {
+        display: block;
+        color: $color-muted;
+      }
+    }
+  }
+}
+
+.discover-item__track .discover-item__cover {
+  width: 40px;
+  height: 40px;
+}

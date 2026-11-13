@@ -1,0 +1,468 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Detail Pages
+   (song, album, playlist, artist, podcast, episode)
+   ===================== */
+// Page tints
+body[class*="tint-"] {
+  .main-content {
+    background: linear-gradient(180deg, var(--page-tint) 0, $color-panel 70%);
+  }
+
+  .top-header {
+    background: transparent;
+  }
+}
+
+.tint-navy { --page-tint: #1b1b5a; }
+.tint-brown { --page-tint: #4a2a12; }
+.tint-slate { --page-tint: #272c35; }
+.tint-gray { --page-tint: #2a2a2a; }
+
+// Buttons
+.icon-btn {
+  @include icon-button(40px);
+}
+
+.play-btn {
+  @include flex(row, center, center);
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: $color-accent;
+  color: $color-bg;
+  cursor: pointer;
+}
+
+.pill-btn {
+  padding: $spacing-sm $spacing-lg;
+  border: 0;
+  border-radius: $radius-pill;
+  background: $color-chip;
+  color: $color-muted;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.actions {
+  @include flex(row, flex-start, center, $spacing-sm);
+  margin: $spacing-md 0;
+}
+
+// Page head
+.page-head {
+  &__title {
+    margin: 0;
+    font-size: 40px;
+  }
+
+  &__meta {
+    margin: $spacing-sm 0 0;
+    color: $color-muted;
+    font-size: 13px;
+  }
+}
+
+// Two column layout
+.detail {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: $spacing-xl;
+  align-items: start;
+  padding-bottom: $spacing-xl;
+
+  &__aside {
+    @include flex(column, flex-start, stretch, $spacing-md);
+  }
+}
+
+// Covers
+.cover {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: $radius-md;
+
+  &--ram { background: linear-gradient(90deg, #cfd6e2 50%, #0b0b0b 50%); }
+  &--mix { background: linear-gradient(180deg, #2c2c2c, #0b0b0b); }
+  &--podcast { background: $color-text; color: #111; }
+
+  &__label {
+    position: absolute;
+    bottom: $spacing-md;
+    left: $spacing-md;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  &--podcast &__label {
+    inset: 0;
+    @include flex(row, center, center);
+    padding: $spacing-md;
+    text-align: center;
+    font-size: 20px;
+  }
+}
+
+// People (artists / credits)
+.people {
+  @include flex(column, flex-start, stretch, $spacing-md);
+
+  li {
+    @include flex(row, flex-start, center, $spacing-md);
+  }
+
+  &__avatar {
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+  }
+
+  &__name,
+  &__role {
+    margin: 0;
+    font-size: $font-size-sm;
+  }
+
+  &__role {
+    color: $color-muted;
+  }
+}
+
+// Song page
+.song {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: $spacing-xl;
+  padding-bottom: $spacing-lg;
+
+  &__info {
+    @include flex(column, flex-start, stretch, $spacing-md);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 40px;
+  }
+}
+
+.lyrics {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: $spacing-lg;
+  padding: $spacing-lg 0 $spacing-xl;
+
+  &__tools {
+    @include flex(column, flex-start, center, $spacing-md);
+    color: $color-muted;
+  }
+
+  &__lines p {
+    margin: 0 0 $spacing-md;
+    font-size: 22px;
+    font-weight: 700;
+  }
+}
+
+// Artist pages
+.hero {
+  @include flex(row, space-between, flex-end);
+  min-height: 300px;
+  padding: $spacing-lg;
+  border-radius: $radius-md;
+  background: linear-gradient(180deg, #b9b9b9 0%, #3a3a3a 55%, #0b0b0b 100%);
+
+  &__title {
+    margin: 0;
+    font-size: 56px;
+  }
+
+  &__meta {
+    margin: $spacing-sm 0 0;
+    font-size: 13px;
+  }
+
+  &__actions {
+    @include flex(row, flex-end, center, $spacing-sm);
+  }
+}
+
+.tabs {
+  @include flex(row, flex-start, center, $spacing-lg);
+  margin-bottom: $spacing-lg;
+  overflow-x: auto;
+  border-bottom: 1px solid $color-border;
+
+  &__link {
+    flex: none;
+    padding: $spacing-md 0;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: $color-muted;
+    font-size: $font-size-sm;
+    cursor: pointer;
+
+    &.is-active {
+      border-bottom-color: $color-accent;
+      color: $color-text;
+    }
+  }
+
+  &__views {
+    @include flex(row, flex-end, center);
+    margin-left: auto;
+  }
+}
+
+.pick {
+  @include flex(row, flex-start, center, $spacing-md);
+  padding: $spacing-sm;
+  border-radius: $radius-md;
+  background: $color-surface;
+  font-size: $font-size-sm;
+
+  &__cover {
+    flex: none;
+    width: 100px;
+    height: 100px;
+    border-radius: $radius-sm;
+  }
+}
+
+.about {
+  display: grid;
+  grid-template-columns: 160px 1fr 240px;
+  gap: $spacing-xl;
+  padding-bottom: $spacing-xl;
+
+  &__text {
+    margin: 0;
+    color: $color-muted;
+    line-height: 1.6;
+  }
+}
+
+.rank {
+  @include flex(column, center, center);
+  width: 130px;
+  height: 130px;
+  background: #1a7f3c;
+  font-weight: 700;
+  clip-path: polygon(50% 0%, 61% 8%, 75% 6%, 82% 18%, 94% 25%, 92% 39%, 100% 50%, 92% 61%, 94% 75%, 82% 82%, 75% 94%, 61% 92%, 50% 100%, 39% 92%, 25% 94%, 18% 82%, 6% 75%, 8% 61%, 0% 50%, 8% 39%, 6% 25%, 18% 18%, 25% 6%, 39% 8%);
+
+  strong {
+    font-size: 26px;
+  }
+}
+
+.stats {
+  @include flex(column, flex-start, flex-start, $spacing-md);
+
+  &__value {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  &__label {
+    margin: 0;
+    color: $color-muted;
+    font-size: $font-size-sm;
+  }
+}
+
+.album-row {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: $spacing-lg;
+  align-items: center;
+  padding: $spacing-md 0;
+  border-bottom: 1px solid $color-border;
+
+  &__cover {
+    width: 130px;
+    height: 130px;
+    border-radius: $radius-sm;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  &__meta {
+    margin: $spacing-xs 0;
+    color: $color-muted;
+    font-size: $font-size-sm;
+  }
+}
+
+// Podcast & episode
+.toolbar-inline {
+  @include flex(row, space-between, center);
+  margin: $spacing-lg 0 $spacing-md;
+}
+
+.episode {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: $spacing-md;
+  padding: $spacing-md 0;
+  border-bottom: 1px solid $color-border;
+
+  &__cover {
+    width: 130px;
+    height: 130px;
+    border-radius: $radius-sm;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-md;
+  }
+
+  &__meta {
+    margin: $spacing-xs 0;
+    color: $color-muted;
+    font-size: 12px;
+  }
+
+  &__text {
+    margin: 0;
+    color: $color-muted;
+    font-size: $font-size-sm;
+  }
+}
+
+.video {
+  @include flex(row, center, center);
+  aspect-ratio: 16 / 9;
+  border-radius: $radius-md;
+  background: linear-gradient(135deg, #5a3a1f, #111);
+
+  &__play {
+    @include flex(row, center, center);
+    width: 56px;
+    height: 56px;
+    border: 0;
+    border-radius: 50%;
+    background: $color-text;
+    color: $color-bg;
+    cursor: pointer;
+  }
+}
+
+.about-box {
+  &__title {
+    margin: 0 0 $spacing-sm;
+    font-size: 20px;
+  }
+
+  &__text {
+    margin: 0 0 $spacing-md;
+    color: $color-muted;
+    font-size: $font-size-sm;
+  }
+}
+
+.rating {
+  @include flex(row, flex-start, center, $spacing-xs);
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-pill;
+  background: $color-chip;
+  font-size: 12px;
+  color: $color-muted;
+
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// Responsive
+@include respond($bp-tablet) {
+  .detail,
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .song {
+    grid-template-columns: 240px 1fr;
+  }
+}
+
+@include respond($bp-mobile) {
+  .song {
+    grid-template-columns: 1fr;
+  }
+
+  .song__title,
+  .page-head__title {
+    font-size: 28px;
+  }
+
+  .hero {
+    min-height: 200px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+
+    &__title {
+      font-size: 32px;
+    }
+  }
+
+  .lyrics {
+    grid-template-columns: 1fr;
+  }
+
+  .col-album {
+    display: none;
+  }
+
+  .album-row {
+    grid-template-columns: 80px 1fr;
+
+    &__cover {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
+
+// Artist hero image
+.hero {
+  position: relative;
+  overflow: hidden;
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba($color-bg, 0.75));
+  }
+
+  > *:not(.hero__image) {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.episode__cover {
+  display: block;
+  overflow: hidden;
+}

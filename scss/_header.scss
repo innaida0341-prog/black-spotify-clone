@@ -1,0 +1,50 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Top Header Styles
+   ===================== */
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  height: $header-height;
+  background: $color-panel;
+  @include flex(row, space-between, center);
+
+  &__nav {
+    @include flex(row, flex-start, center, $spacing-sm);
+  }
+
+  &__link {
+    @include flex(row, flex-start, center, $spacing-sm);
+    padding: 10px $spacing-md;
+    border-radius: $radius-md;
+    color: $color-muted;
+    font-weight: 700;
+
+    &.is-active {
+      background: $color-bg;
+      color: $color-text;
+    }
+  }
+
+  &__actions {
+    @include flex(row, flex-end, center, $spacing-sm);
+  }
+
+  &__button {
+    @include icon-button(40px);
+  }
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #e63946 50%, #3a86ff 50%);
+  }
+}
+
+.top-header__avatar {
+  overflow: hidden;
+}

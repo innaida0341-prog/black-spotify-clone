@@ -1,0 +1,138 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Library & Liked Songs
+   ===================== */
+.toolbar {
+  @include flex(row, space-between, center, $spacing-md);
+  margin-bottom: $spacing-lg;
+
+  &__group {
+    @include flex(row, flex-start, center, $spacing-sm);
+  }
+
+  &__button {
+    @include icon-button(40px);
+
+    &.is-active {
+      background: $color-surface;
+      color: $color-text;
+    }
+  }
+
+  &__label {
+    @include flex(row, flex-start, center, $spacing-sm);
+    padding: 0 $spacing-sm;
+    border: 0;
+    background: transparent;
+    color: $color-muted;
+    font-size: $font-size-sm;
+    cursor: pointer;
+  }
+}
+
+// Library grid
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: $spacing-md;
+}
+
+.card {
+  &__media {
+    position: relative;
+  }
+
+  &--center {
+    text-align: center;
+  }
+
+  &__pin {
+    @include flex(row, center, center);
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba($color-bg, 0.65);
+    color: $color-accent;
+
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__cover--icon {
+    @include flex(row, center, center);
+    color: $color-muted;
+
+    .icon {
+      width: 45%;
+      height: 45%;
+      stroke-width: 1.6;
+    }
+  }
+
+  &__cover--green {
+    background: #14532d;
+    color: $color-accent;
+  }
+
+  &__cover--gray {
+    background: #3a3a3a;
+  }
+
+  &__cover--dark {
+    background: #0b0b0b;
+  }
+}
+
+// Liked songs table
+.table-wrap {
+  overflow-x: auto;
+}
+
+.track-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $font-size-sm;
+
+  th {
+    padding: $spacing-sm $spacing-md;
+    border-bottom: 1px solid $color-border;
+    color: $color-muted;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  td {
+    padding: $spacing-sm $spacing-md;
+    color: $color-muted;
+  }
+
+  &__title {
+    @include flex(row, flex-start, center, $spacing-md);
+    color: $color-text;
+  }
+
+  &__artist {
+    display: block;
+    color: $color-muted;
+    font-size: 12px;
+  }
+
+  &__cover {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-sm;
+  }
+
+  .icon--filled {
+    fill: $color-accent;
+    stroke: $color-accent;
+  }
+}

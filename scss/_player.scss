@@ -1,0 +1,99 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* =====================
+   Bottom Player
+   ===================== */
+.player {
+  position: fixed;
+  right: $spacing-sm;
+  bottom: $spacing-sm;
+  left: $sidebar-width + $spacing-md; // starts after the sidebar
+  height: $player-height;
+  padding: 0 $spacing-md;
+  border-radius: $radius-md;
+  background: $color-player;
+  display: grid;
+  grid-template-columns: 1fr minmax(380px, 2fr) 1fr;
+  align-items: center;
+  gap: $spacing-md;
+
+  &-left {
+    @include flex(row, flex-start, center, $spacing-md);
+  }
+
+  &__cover {
+    width: 52px;
+    height: 52px;
+    border-radius: $radius-sm;
+    background: linear-gradient(90deg, #c9d6e8 50%, #111 50%);
+  }
+
+  &__title,
+  &__artist,
+  &__album {
+    margin: 0;
+    font-size: $font-size-sm;
+  }
+
+  &__artist,
+  &__album {
+    color: $color-muted;
+  }
+
+  &-center {
+    @include flex(column, center, center, $spacing-sm);
+  }
+
+  &__controls {
+    @include flex(row, center, center, $spacing-md);
+  }
+
+  &__button {
+    @include icon-button(36px);
+  }
+
+  &__play {
+    @include flex(row, center, center);
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: $color-accent;
+    color: $color-bg;
+    cursor: pointer;
+  }
+
+  &__progress {
+    @include flex(row, center, center, $spacing-sm);
+    width: 100%;
+    font-size: 12px;
+    color: $color-muted;
+  }
+
+  &__bar {
+    flex: 1;
+    height: 4px;
+    border-radius: $radius-pill;
+    background: rgba($color-text, 0.3);
+
+    &-fill {
+      display: block;
+      width: 48%;
+      height: 100%;
+      border-radius: inherit;
+      background: $color-text;
+    }
+  }
+
+  &-right {
+    @include flex(row, flex-end, center, $spacing-sm);
+  }
+
+  &__volume {
+    width: 90px;
+    height: 4px;
+    border-radius: $radius-pill;
+    background: rgba($color-text, 0.3);
+  }
+}
